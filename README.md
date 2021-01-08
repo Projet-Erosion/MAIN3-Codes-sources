@@ -1,2 +1,3 @@
 # MAIN3-Codes-sources
-Codes sources projet pluridisciplinaire
+
+Pour ce projet, nous avons codé de ce projet en python.
