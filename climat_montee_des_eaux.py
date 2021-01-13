@@ -32,6 +32,7 @@ h_star = 5. #m limite d'action des vagues/3 ou 4 m
 C = 0.007 # m/an taux d'erosion cotiere maximum
 K0 = 1. # m^2/an taux d'erosion par diffusion
 
+z2D=z
 tplot=0.
 t=0.
 
@@ -45,7 +46,9 @@ t=0.
 # - Le niveau de la mer monte jusqu'à 2m d'ici 2100
 # - Le niveau de la mer monte jusqu'à 1m d'ici 2100
 
-plt.plot(x,z)
+plt.xlabel("Domaine d'étude (m)")
+plt.ylabel("Altitude (m)")
+plt.plot(x,z,label="Domaine en 2000")
 
 k = 0
 print_SL_x = []
@@ -56,7 +59,7 @@ while list(x*(z <= 0))[k] != 0 :
 print_SL_x = np.array(print_SL_x)
 print_SL_y = np.zeros(print_SL_x.size)
 
-plt.plot(print_SL_x , print_SL_y, color="blue")
+plt.plot(print_SL_x , print_SL_y, label="Niveau de la mer en 2000", color="blue")
 
 for k in range(0,ntimestep+1): # teamps géologiques et formation des térasses
 
@@ -95,11 +98,12 @@ for k in range(0,ntimestep+1): # teamps géologiques et formation des térasses
     z_old = z_old + dt*tec + dz_ero
     z = li.spsolve(sparse, z_old)
 
+    z2D=np.vstack((z2D,z))
     tplot=np.append(tplot,t)
 
     t=t+dt
 
-plt.plot(x,z)
+plt.plot(x,z,label="Domaine en 2100")
 
 k = 0
 print_SL_x = []
@@ -110,19 +114,15 @@ while list(x*(h >= 0))[k] != 0 :
 print_SL_x = np.array(print_SL_x)
 print_SL_y = np.ones(print_SL_x.size)*SL
 
-plt.plot(print_SL_x , print_SL_y, color="red")
-
+plt.plot(print_SL_x , print_SL_y, label="Niveau de la mer en 2100", color="red")
+plt.legend()
 plt.show()
 
-z2D=np.ones(x.size)*z[0]
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-for k in range(0,ntimestep+1):
-	z2D=np.vstack((z2D,z))
 X , T = np.meshgrid(x, tplot)
-ax . set_xlabel ( 'x' ) 
-ax . set_ylabel ( 'y' ) 
-ax . set_zlabel ( 'z' );
+ax . set_xlabel ( "Domaine d'étude (m)" ) 
+ax . set_ylabel ( "Temps (années)" ) 
+ax . set_zlabel ( "Altitude (m)" );
 ax.plot_surface(X,T,z2D,cmap='terrain', edgecolor='none')
-ax.set_title('topographie')
 plt.show()
