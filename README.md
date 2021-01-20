@@ -10,4 +10,4 @@ Nous disposons de 6 fichiers :
 * fusion_des_modeles.py : Modélisation sur le long terme
 * climat_montee_des_eaux.py : Modelisation à l’ ́echelle du rechauffement climatique en prenant en compte l'augmentation du niveau de la mer
 * climat_puissance_des_vagues.py : Modelisation à l’ ́echelle du rechauffement climatique en prenant en compte l'augmentation de la puissance des vagues
-
+* Puissance_et_Montee.py : Modélisation avec l'ugmentation du niveau de la mer et de la puissance des vagues
